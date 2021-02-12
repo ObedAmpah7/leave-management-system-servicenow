@@ -3,49 +3,43 @@
         <active>true</active>
         <applies_extended>false</applies_extended>
         <condition/>
-        <description/>
-        <field>end_date</field>
+        <description>Duration Should not be negative</description>
+        <field>duration</field>
         <global>true</global>
         <isolate_script>true</isolate_script>
         <messages/>
-        <name>setDuration</name>
+        <name>Validate Duration </name>
         <order/>
         <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
     if (isLoading || newValue === '') {
         return;
     }
 
-    var start = g_form.getValue('start_date');
     //Type appropriate comment here, and begin script below
-    
-        var ga = new GlideAjax('lmsAjax');
-        ga.addParam('sysparm_name', 'getDateDiff');
-        ga.addParam('sysparm_start', start);
-        ga.addParam('sysparm_end', newValue);
-        ga.getXML(getDuration);
+    var duration = g_form.getValue('duration');
+	var balance = g_form.getValue('balance');
 
-        function getDuration(response) {
-            var answer = response.responseXML.documentElement.getAttribute("answer");
-            var days = (answer / (1000 * 60 * 60 * 24));
-            var days1 = days + 1;
-            g_form.setValue('duration', days1);
-        }
+
+    if (duration <= 0) {
+        g_form.addErrorMessage('Check You End Date Field Value. It Should Be A Date That Comes After The Start Date');
+   }
+
 }]]></script>
         <sys_class_name>sys_script_client</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2021-02-05 10:07:09</sys_created_on>
+        <sys_created_on>2021-02-09 11:58:25</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>e4cc6a032f8e20103af0bcb62799b620</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>setDuration</sys_name>
+        <sys_id>ca907f542fde20103af0bcb62799b6a2</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Validate Duration </sys_name>
         <sys_overrides/>
         <sys_package display_value="Leave Management System" source="x_573537_lms">556e027e2f8220103af0bcb62799b64e</sys_package>
         <sys_policy/>
         <sys_scope display_value="Leave Management System">556e027e2f8220103af0bcb62799b64e</sys_scope>
-        <sys_update_name>sys_script_client_e4cc6a032f8e20103af0bcb62799b620</sys_update_name>
+        <sys_update_name>sys_script_client_ca907f542fde20103af0bcb62799b6a2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-08 13:48:05</sys_updated_on>
+        <sys_updated_on>2021-02-11 13:58:21</sys_updated_on>
         <table>x_573537_lms_leave_request</table>
         <type>onChange</type>
         <ui_type>10</ui_type>
